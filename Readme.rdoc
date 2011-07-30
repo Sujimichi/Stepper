@@ -48,9 +48,9 @@ Find a step when referenced with And
 
 
 
-===See what lines in features use a given step
+===See which lines in features use a given step
 
-Give a step as used by a line in a feature and see 
+Given a step as used by a line in a feature, see which line of which file the step is defined on and which lines of the various features use it.
 
     step --useof "Given I am logged in as \"sujimichi\""
 
