@@ -45,10 +45,10 @@ Give a step as used by a line in a feature and see
 
     File: login_steps.rb
     42  Given /^I am logged in as "([^"]*)"$/ do |user_name|	Used in 8 features
-  	    features/login.feature:
+        features/login.feature:
         lines: 10,18,30,42
         features/users.feature:
-  	    lines: 9,14,25,27
+        lines: 9,14,25,27
 
 
 You can get the same output by giving the file name and linenumber of a step. 
