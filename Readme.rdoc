@@ -21,9 +21,9 @@ You have loads of step definitions and your pretty sure that some are not being 
 Stepper was written in haste to solve a problem.  It could do with improvment!
 
 It makes a few assumptions
-1)  It assumes that it will be run from the rails root dir
-2)  It assumes that your features and step definitions are in rails_root/features
-3)  It removes step_definitions/ from output, assuming your step definitions are in that dir
+1. It assumes that it will be run from the rails root dir
+2. It assumes that your features and step definitions are in rails_root/features
+3. It removes step_definitions/ from output, assuming your step definitions are in that dir
 
 
 ==Full Usage
