@@ -5,3 +5,7 @@ end
 Given /^there is a user called "([^"]*)"$/ do |arg1|
   Factory.create(:user, :username => arg1, :email => "#{arg1.gsub(" ","_")}_mail@#{arg1.gsub(" ","")}sdomain.com")
 end
+
+Given /^there is a registered user/ do 
+
+end

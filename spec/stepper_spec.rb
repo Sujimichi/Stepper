@@ -11,10 +11,45 @@ describe Stepper do
     
   end
 
-  it 'should do stuff' do 
-    expected = "\n\nStepper Results:\n\nFile: features/login_steps.rb1\tGiven /^I am logged in as \"([^\"]*)\"$/ do |arg1|\n\tUsed in 1 features\tfeatures/sub_feature/user_register.feature:\n\tlines: 12\n5\tGiven /^I am logged in$/ do |arg1|\n\tSTEP NOT USED\n\n9\tGiven /^I am not logged in$/ do\n\tUsed in 1 features\tfeatures/sub_feature/user_register.feature:\n\tlines: 7\n13\tGiven /^(?:|I )am on (.+)$/ do |page_name|\n\tUsed in 3 features\tfeatures/sub_feature/user_register.feature:\n\tlines: 6\tfeatures/login.feature:\n\tlines: 6,12\n17\tWhen /^I sign in as \"([^\"]*)\" with \"([^\"]*)\"$/ do |arg1, arg2|\n\tUsed in 2 features\tfeatures/login.feature:\n\tlines: 7,13\n21\tWhen /^I login as \"([^\"]*)\" with \"([^\"]*)\"$/ do |arg1, arg2|\n\tSTEP NOT USED\n\n25\tThen /^I should be logged in$/ do\n\tUsed in 1 features\tfeatures/login.feature:\n\tlines: 8\n29\tThen /^I should not be logged in$/ do\n\tUsed in 1 features\tfeatures/login.feature:\n\tlines: 14\n\n\nFile: features/user_steps.rb1\tGiven /^the registered user \"([^\"]*)\" with the password \"([^\"]*)\"$/ do |arg1, arg2|\n\tUsed in 2 features\tfeatures/login.feature:\n\tlines: 5,11\n5\tGiven /^there is a user called \"([^\"]*)\"$/ do |arg1|\n\tSTEP NOT USED\n\n"
-    
-    Stepper.process.should == expected
+  #called with no args
+  it 'should display info about each step definition' do 
+    puts Stepper.process
+    Stepper.process.should == Expected.summary_output
+  end
+
+  #Called with --find and an example usage of a step from a feature file
+  #returns the file name and line number for that step definition
+  it 'should display the line number and file name where a step definition is defined when given the step as it is used in a feature' do 
+    output = Stepper.process ["--find", "Given the registered user \"test_user\" with the password \"foobar\""]
+    output.should be_include("features/user_steps.rb")
+    output.should be_include("line:\t1")
+  end
+  #As above only And instead of Given to asert the same step will be found
+  it 'should display the line number and file name where a step definition is defined when given the step as it is used in a feature' do 
+    output = Stepper.process ["--find", "And the registered user \"test_user\" with the password \"foobar\""]
+    output.should be_include("features/user_steps.rb")
+    output.should be_include("line:\t1")
+  end
+  
+  #Called with --useof followed by a step_definition file and line number
+  #returns a list of the feature steps that call then given step definition.
+  it 'should display info for a step definition when given as it is used in a feature' do 
+    output = Stepper.process ["--useof", "user_steps", "1"]
+    output.should == Expected.specific_resutls_for_given_the_registered_user
+  end
+  #Called with --useof followed by an example usage of a step from a feature file
+  #returns a list of the feature steps that call then given step definition.
+  it 'should display info for a step definition when given as it is used in a feature' do 
+    output = Stepper.process ["--useof", "Given the registered user \"test_user\" with the password \"foobar\""]
+    output.should == Expected.specific_resutls_for_given_the_registered_user
+  end
+
+
+  #called with --notused
+  #returns a list of the steps whcih do not get called by the features
+  it 'should return a list of all tests that are not used by any feature steps' do 
+    output = Stepper.process ["--notused"]
+    output.should == Expected.results_for_unused_steps
   end
 
 end
@@ -40,7 +75,7 @@ describe StepFinder do
     end
     it 'should have an array of steps with an entry for each step definition in the fake_app' do 
       @finder.steps.should be_a(Array)
-      @finder.steps.size.should == 10
+      @finder.steps.size.should == 11
     end
     it 'should have a hash for each step' do 
       @finder.steps.map{|s| s.is_a?(Hash)}.all?.should be_true
@@ -83,4 +118,75 @@ describe StepFinder do
 
   end
 
+end
+
+class Expected
+
+  def self.results_for_unused_steps
+<<EOF
+\n\nStepper Results for Unused Steps:
+
+File: features/login_steps.rb5	Given /^I am logged in$/ do |arg1|
+21	When /^I login as "([^"]*)" with "([^"]*)"$/ do |arg1, arg2|
+
+
+File: features/user_steps.rb5	Given /^there is a user called "([^"]*)"$/ do |arg1|
+9	Given /^there is a registered user/ do 
+EOF
+  end
+
+  def self.specific_resutls_for_given_the_registered_user
+<<EOF
+\n\nStepper Results for Specific Step:
+
+File: features/user_steps.rb1	Given /^the registered user "([^"]*)" with the password "([^"]*)"$/ do |arg1, arg2|
+	Used in 2 features	features/login.feature:
+	lines: 5,11
+EOF
+  end
+
+  def self.summary_output
+<<EOF
+
+
+Stepper Results:
+
+File: features/login_steps.rb1	Given /^I am logged in as "([^"]*)"$/ do |arg1|
+	Used in 1 features	features/sub_feature/user_register.feature:
+	lines: 12
+5	Given /^I am logged in$/ do |arg1|
+	STEP NOT USED
+
+9	Given /^I am not logged in$/ do
+	Used in 1 features	features/sub_feature/user_register.feature:
+	lines: 7
+13	Given /^(?:|I )am on (.+)$/ do |page_name|
+	Used in 3 features	features/sub_feature/user_register.feature:
+	lines: 6	features/login.feature:
+	lines: 6,12
+17	When /^I sign in as "([^"]*)" with "([^"]*)"$/ do |arg1, arg2|
+	Used in 2 features	features/login.feature:
+	lines: 7,13
+21	When /^I login as "([^"]*)" with "([^"]*)"$/ do |arg1, arg2|
+	STEP NOT USED
+
+25	Then /^I should be logged in$/ do
+	Used in 1 features	features/login.feature:
+	lines: 8
+29	Then /^I should not be logged in$/ do
+	Used in 1 features	features/login.feature:
+	lines: 14
+
+
+File: features/user_steps.rb1	Given /^the registered user "([^"]*)" with the password "([^"]*)"$/ do |arg1, arg2|
+	Used in 2 features	features/login.feature:
+	lines: 5,11
+5	Given /^there is a user called "([^"]*)"$/ do |arg1|
+	STEP NOT USED
+
+9	Given /^there is a registered user/ do 
+	STEP NOT USED
+
+EOF
+  end
 end
