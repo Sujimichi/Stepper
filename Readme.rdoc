@@ -27,7 +27,7 @@ It makes a few assumptions
 
 ==Full Usage
 
-In the Command line from within your rails directory;
+All commands are run in the Command line from within your rails directory;
 
 ===Find a step definintion given a line from a feature
 
