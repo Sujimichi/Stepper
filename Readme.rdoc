@@ -25,6 +25,10 @@ It makes a few assumptions
 2. It assumes that your features and step definitions are in rails_root/features
 3. It removes step_definitions/ from output, assuming your step definitions are in that dir
 
+==install
+
+    gem install stepper
+ 
 
 ==Full Usage
 
@@ -90,8 +94,4 @@ To get an output that shows for each step, where it is and which features use it
 
 
 
-==Install
-
-    gem install stepper
- 
 
