@@ -219,11 +219,11 @@ class Expected
   def self.results_for_unused_steps
 <<EOF
 \n\nStepper Results for Unused Steps:\n
-File: features/login_steps.rb
+File: login_steps.rb
 5\tGiven /^I am logged in$/ do |arg1|
 21\tWhen /^I login as "([^"]*)" with "([^"]*)"$/ do |arg1, arg2|
 
-File: features/user_steps.rb
+File: user_steps.rb
 5\tGiven /^there is a user called "([^"]*)"$/ do |arg1|
 9\tGiven /^there is a registered user/ do 
 EOF
@@ -232,7 +232,7 @@ EOF
   def self.specific_resutls_for_given_the_registered_user
 <<EOF
 \n\nStepper Results for Specific Step:\n
-File: features/user_steps.rb
+File: user_steps.rb
 1\tGiven /^the registered user "([^"]*)" with the password "([^"]*)"$/ do |arg1, arg2|	Used in 2 features
 \tfeatures/login.feature:
 \tlines: 5,11
@@ -243,7 +243,7 @@ EOF
 <<EOF
 \n\nStepper Results:
 
-File: features/login_steps.rb
+File: login_steps.rb
 1	Given /^I am logged in as "([^"]*)"$/ do |arg1|	Used in 1 features
 	features/sub_feature/user_register.feature:
 	lines: 12
@@ -279,7 +279,7 @@ File: features/login_steps.rb
 	lines: 14
 
 
-File: features/user_steps.rb
+File: user_steps.rb
 1	Given /^the registered user "([^"]*)" with the password "([^"]*)"$/ do |arg1, arg2|	Used in 2 features
 	features/login.feature:
 	lines: 5,11

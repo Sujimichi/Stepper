@@ -109,7 +109,7 @@ class StepFinder
         next if step[:features] 
       end
 
-      f_name = step[:file].sub("step_definitions/", "")
+      f_name = step[:file].sub("features/step_definitions/", "")
       if file_name != f_name
         file_name = f_name
         output << "\n\nFile: #{file_name}"
