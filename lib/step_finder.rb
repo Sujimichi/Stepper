@@ -134,11 +134,11 @@ class StepFinder
         output << "\n\tSTEP NOT USED\n\n" unless @args[0].eql?("--notused")
       end
     end
-    if @args.join.include?("--errs")
+    if @args.join.include?("--undefined")
       output << "\n\nUnmatched Features"
       @unmatched_features.each do |f|
-        output << "#{f[:line].chomp}"
-        output << "\t#{f[:file]}, #{f[:line_number]}"
+        output << "\n#{f[:line].chomp}"
+        output << "\n\t#{f[:file]}, #{f[:line_number]}"
       end
     end
     output
