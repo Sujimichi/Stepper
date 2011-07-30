@@ -18,7 +18,7 @@ You have loads of step definitions and your pretty sure that some are not being 
     step --notused
 
 
-Stepper was written in haste to solve a problem.  It could do with improvment!
+Stepper was written in haste to solve a problem.  It could do with improvment!  Feel free to use and improve.  
 
 It makes a couple assumptions
 1. It assumes that it will be run from the rails root dir
@@ -71,6 +71,7 @@ You can get the same output by giving the file name and linenumber of a step.
 
 
 ===Find Un-used Steps
+To get a list of the steps which are no longer being used by your features
 
     step --notused
 
@@ -84,11 +85,9 @@ You can get the same output by giving the file name and linenumber of a step.
     118	Given /^Im logged in as "([^"]*)" with no user data$/ do |user_name|
     
 ===Overview
-Just simply call
+To get an output that shows for each step, where it is and which features use it (or if its not used), just call;
+
     step
-
-To get an output that shows for each step, where it is and which features use it (or if its not used)
-
 
 
 
