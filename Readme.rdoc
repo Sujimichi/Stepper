@@ -6,7 +6,7 @@ You are looking at some cucumber features and you come to step which you want to
 
     And I have put "some stuff" into "this field"
 
-There are 100's of step definitions over 10's of files and many are similar.  How do you quickly find where that step definition is?  
+There are 100's of step definitions over 10's of files and many are similar.  How do you quickly find where that step definition is?
 You could rak "I have put" but that may well return many steps.  You could get clever with regexps or you could use Stepper
 
     step --find "And I have put \"some stuff\" into \"this field\""
@@ -18,7 +18,7 @@ You have loads of step definitions and your pretty sure that some are not being 
     step --notused
 
 
-Stepper was written in haste to solve a problem.  It could do with improvment!  Feel free to use and improve.  
+Stepper was written in haste to solve a problem.  It could do with improvment!  Feel free to use and improve.
 It is also my first attempt at writing a gem!
 
 It makes a couple assumptions
@@ -26,15 +26,19 @@ It makes a couple assumptions
 2. It assumes that your features and step definitions are in rails_root/features
 
 ==install
+NB: not yet release to rubygems.  Need to check a few things first
+Then it will just be good ol'
+
     gem install stepper
- 
+
+
 ==Full Usage
 
 All commands are run in the Command line from within your rails directory;
 
 ===Find a step definintion given a line from a feature
 
-Find a simple step by 
+Find a simple step by
     step --find "Given I am logged in"
 
 Find a step that uses args
@@ -66,7 +70,7 @@ Given a step as used by a line in a feature, see which line of which file the st
         lines: 9,14,25,27
 
 
-You can get the same output by giving the file name and linenumber of a step. 
+You can get the same output by giving the file name and linenumber of a step.
 
     step --useof login_steps 42
 
@@ -84,7 +88,7 @@ To get a list of the steps which are no longer being used by your features
     File: features/common_steps.rb
     99	Given /^the user "([^"]*)"$/ do |arg1|
     118	Given /^Im logged in as "([^"]*)" with no user data$/ do |user_name|
-    
+
 ===Overview
 To get an output that shows for each step, where it is and which features use it (or if its not used), just call;
 
