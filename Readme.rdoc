@@ -27,11 +27,18 @@ It makes a few assumptions
 
 ==Full Usage
 
-From within your rails directory 
+In the Command line from within your rails directory;
 
 ===Find a step definintion given a line from a feature
 
+Find a simple step by 
     step --find "Given I am logged in"
+
+Find a step that uses args
+    step --find "Given I am logged in as \"sujimichi\" with the password \"password\""
+
+Find a step when referenced with And
+    step --find "And I am logged in as \"sujimichi\" with the password \"password\""
 
 
 
