@@ -1,0 +1,36 @@
+= Stepper
+Locate step definitions from cucumber features, Find which ones are not being used and see which features use a given step definition
+
+==Use Case
+You are looking at some cucumber features and you come to step which you want to check.  ie:
+
+And I have put "some stuff" into "this field"
+
+There are 100's of step definitions over 10's of files and many are similar.  How do you quickly find where that step definition is?  
+You could rak "I have put" but that may well return many steps.  You could get clever with regexps or you could use Stepper
+
+
+==Usage
+
+From within your rails directory 
+
+
+    step --find "And I have put \"some stuff\" into \"this field\""
+
+
+
+
+This was written in haste to solve a problem.  It could do with refining and more options.  
+
+It makes a few assumptions
+1)  It assumes that it will be run from the rails root dir
+2)  It assumes that your features and step definitions are in rails_root/features
+3)  It removes step_definitions/ from output, assuming your step definitions are in that dir
+
+==Install
+
+    gem install stepper
+ 
+
+
+
