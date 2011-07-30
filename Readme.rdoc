@@ -90,4 +90,6 @@ To get an output that shows for each step, where it is and which features use it
     step
 
 
+==License
 
+Stepper is released under the MIT license.
