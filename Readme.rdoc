@@ -1,31 +1,75 @@
 = Stepper
-Locate step definitions from cucumber features, Find which ones are not being used and see which features use a given step definition
+Locate step definitions from cucumber features, find which steps are not being used and see which features use a given step definition.
 
-==Use Case
+==Use Cases
+You have loads of step definitions and your pretty sure that some are not being used anymore.  With a test suite that takes 30 minutes to run trail and error is not your friend, so how to you find your obselete steps?
+
+    step --notused
+
 You are looking at some cucumber features and you come to step which you want to check.  ie:
 
-And I have put "some stuff" into "this field"
+    And I have put "some stuff" into "this field"
 
 There are 100's of step definitions over 10's of files and many are similar.  How do you quickly find where that step definition is?  
 You could rak "I have put" but that may well return many steps.  You could get clever with regexps or you could use Stepper
 
-
-==Usage
-
-From within your rails directory 
-
-
     step --find "And I have put \"some stuff\" into \"this field\""
+    found:	Given /^I have put "([^"]*)" into "([^"]*)"$/ do |data, field|
+    line:	42 in features/my_nondescript_steps.rb
 
-
-
-
-This was written in haste to solve a problem.  It could do with refining and more options.  
+Stepper was written in haste to solve a problem.  It could do with improvment, but it worked for my use case!  
 
 It makes a few assumptions
 1)  It assumes that it will be run from the rails root dir
 2)  It assumes that your features and step definitions are in rails_root/features
 3)  It removes step_definitions/ from output, assuming your step definitions are in that dir
+
+
+==Full Usage
+
+From within your rails directory 
+
+===Find a step definintion given a line from a feature
+
+    step --find "Given I am logged in"
+
+
+
+===See what lines in features use a given step
+
+Give a step as used by a line in a feature and see 
+
+    step --useof "Given I am logged in as \"sujimichi\""
+
+    Stepper Results for Specific Step:
+
+    File: login_steps.rb
+    42	Given /^I am logged in as "([^"]*)"$/ do |user_name|	Used in 8 features
+  	  features/login.feature:
+    	lines: 10,18,30,42
+    	features/users.feature:
+  	  lines: 9,14,25,27
+
+
+You can get the same output by giving the file name and linenumber of a step. 
+
+    step --useof login_steps 42
+
+
+
+===Find Un-used Steps
+
+    step --notused
+
+    File: features/state_steps.rb
+    13	When /^I fill in the table data with "([^"]*)"$/ do |arg1|
+    76	Then /^"([^"]*)" should have the table data "([^"]*)"$/ do |e, arg1|
+    81	Then /^then table data field should show "([^"]*)"$/ do |arg1|
+
+    File: features/common_steps.rb
+    99	Given /^the user "([^"]*)"$/ do |arg1|
+    118	Given /^Im logged in as "([^"]*)" with no user data$/ do |user_name|
+    
 
 ==Install
 
