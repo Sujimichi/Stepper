@@ -37,7 +37,7 @@ Find a simple step by
 
 Find a step that uses args
     step --find "Given I am logged in as \"sujimichi\" with the password \"password\""
-Note the step must be wrapped in "" and any " in the step need to be escaped; `\"`
+Note the step must be wrapped in "" and any " in the step need to be escaped; ` \" `
 
 Find a step when referenced with And
     step --find "And I am logged in as \"sujimichi\" with the password \"password\""
