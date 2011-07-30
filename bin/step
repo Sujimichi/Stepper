@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require 'stepper'
-Stepper.process ARGV
-puts "YOUR MOMMA"
+output = Stepper.process ARGV
+puts output
