@@ -2,10 +2,6 @@
 Locate step definitions from cucumber features, find which steps are not being used and see which features use a given step definition.
 
 ==Use Cases
-You have loads of step definitions and your pretty sure that some are not being used anymore.  With a test suite that takes 30 minutes to run trail and error is not your friend, so how to you find your obselete steps?
-
-    step --notused
-
 You are looking at some cucumber features and you come to step which you want to check.  ie:
 
     And I have put "some stuff" into "this field"
@@ -17,7 +13,12 @@ You could rak "I have put" but that may well return many steps.  You could get c
     found:	Given /^I have put "([^"]*)" into "([^"]*)"$/ do |data, field|
     line:	42 in features/my_nondescript_steps.rb
 
-Stepper was written in haste to solve a problem.  It could do with improvment, but it worked for my use case!  
+You have loads of step definitions and your pretty sure that some are not being used anymore.  With a test suite that takes 30 minutes to run trail and error is not your friend, so how do you find your obselete steps?
+
+    step --notused
+
+
+Stepper was written in haste to solve a problem.  It could do with improvment!
 
 It makes a few assumptions
 1)  It assumes that it will be run from the rails root dir
@@ -39,6 +40,10 @@ Find a step that uses args
 
 Find a step when referenced with And
     step --find "And I am logged in as \"sujimichi\" with the password \"password\""
+
+--find will return the matched step and which line of which file;
+    found:  Given /^I am logged in as "([^"]*)" with the password "([^"]*)"$/ do |username, password|
+    line:   50 in login_steps.rb
 
 
 
@@ -63,7 +68,6 @@ You can get the same output by giving the file name and linenumber of a step.
     step --useof login_steps 42
 
 
-
 ===Find Un-used Steps
 
     step --notused
@@ -77,11 +81,16 @@ You can get the same output by giving the file name and linenumber of a step.
     99	Given /^the user "([^"]*)"$/ do |arg1|
     118	Given /^Im logged in as "([^"]*)" with no user data$/ do |user_name|
     
+===Overview
+Just simply call
+    step
+
+To get an output that shows for each step, where it is and which features use it (or if its not used)
+
+
 
 ==Install
 
     gem install stepper
  
-
-
 
