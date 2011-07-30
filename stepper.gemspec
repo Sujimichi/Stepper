@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
   s.description = %q{Command line tool which can locate step definitions used in cucumber features, determine which step definitions are not being used and for each step definition list the feature steps which use it.}
 
   s.add_development_dependency('rspec')
+  s.add_development_dependency('ZenTest')
+
 
   s.rubyforge_project = "stepper"
 
