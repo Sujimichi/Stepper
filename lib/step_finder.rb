@@ -8,24 +8,28 @@ class StepFinder
   end
 
   def handle_args
-    output = ""
+    @output = ""
     if @args[0].eql?("--find")
-      line = @args[1]
-      while line.match(/^\s/)
-        line.sub!(/^\s/,"")  
-      end
-      step, type = find_step_which_matches line
-      if step.nil?
-        output << "not found"
-      else
-        output << "found:\t#{step[:line]}"
-        output << "line:\t#{step[:line_number]} in #{step[:file].sub("step_definitions/", "")}"
-      end
+      find_step_in_file 
     else
       read_and_compaire_features
-      output << present_data   
+      @output << present_data   
     end
-    output
+    @output
+  end
+
+  def find_step_in_file
+    line = @args[1]
+    while line.match(/^\s/)  ##remove whitespace at start of line
+      line = line.sub(/^\s/,"")  
+    end
+    step, type = find_step_which_matches(line) #find the step which would be triggered by the given line
+    if step.nil?
+      @output << "not found"
+    else
+      @output << "found:\t#{step[:line]}"
+      @output << "line:\t#{step[:line_number]} in #{step[:file].sub("step_definitions/", "")}"
+    end
   end
 
   def find_step_which_matches line
@@ -110,24 +114,24 @@ class StepFinder
         file_name = f_name
         output << "\n\nFile: #{file_name}"
       end
-      output << "#{step[:line_number]}\t#{step[:line]}"
+      output << "\n#{step[:line_number]}\t#{step[:line]}".chomp
       if step[:features] && !step[:features].empty?
         output << "\tUsed in #{step[:features].size} features"
         ffile = ""
         line_nos = []
         step[:features].each do |f|
           if ffile != f[:file]
-            output << "\t#{ffile}:\n\tlines: #{line_nos.join(",")}" unless line_nos.empty?
+            output << "\n\t#{ffile}:\n\tlines: #{line_nos.join(",")}" unless line_nos.empty?
             ffile = f[:file]
             line_nos = []
           end
           line_nos << f[:line_number]
         end
-        output << "\t#{ffile}:\n\tlines: #{line_nos.join(",")}" unless line_nos.empty?
+        output << "\n\t#{ffile}:\n\tlines: #{line_nos.join(",")}" unless line_nos.empty?
 
         output << "\n"
       else
-        output << "\tSTEP NOT USED\n\n" unless @args[0].eql?("--notused")
+        output << "\n\tSTEP NOT USED\n\n" unless @args[0].eql?("--notused")
       end
     end
     if @args.join.include?("--errs")
