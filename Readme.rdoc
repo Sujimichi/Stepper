@@ -19,6 +19,7 @@ You have loads of step definitions and your pretty sure that some are not being 
 
 
 Stepper was written in haste to solve a problem.  It could do with improvment!  Feel free to use and improve.  
+It is also my first attempt at writing a gem!
 
 It makes a couple assumptions
 1. It assumes that it will be run from the rails root dir
