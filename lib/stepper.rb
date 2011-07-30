@@ -1,11 +1,5 @@
-#!/usr/bin/env ruby
-
-module Stepper
+class Stepper
   def self.test
-    puts "foo"
-    "foobar"
+    puts Dir.getwd
   end
 end
-
-puts "Welcome"
-Stepper.test
