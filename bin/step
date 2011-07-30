@@ -1,4 +1,3 @@
 #!/usr/bin/env ruby
-
 require 'stepper'
-Stepper.new ARGV
+Stepper.test ARGV

@@ -1,5 +1,6 @@
-class Stepper
-  def self.test
+module Stepper
+  def self.test args = []
     puts Dir.getwd
+    puts args.inspect
   end
 end

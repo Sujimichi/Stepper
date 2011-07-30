@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stepper (0.0.1)
+    stepper (0.0.6)
 
 GEM
   remote: http://rubygems.org/
