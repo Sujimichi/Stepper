@@ -2,7 +2,7 @@
 Locate step definitions from cucumber features, find which steps are not being used and see which features use a given step definition, without waiting to run your test suite.
 
 ==Use Cases
-======Example 1
+====Example 1
 You are looking at some cucumber features and you come to step which you want to check.  ie:
     And I have put "some stuff" into "this field"
 
@@ -20,7 +20,7 @@ You can then change --find to --useof and see what other features use this same 
 
 
 
-======Example 2
+====Example 2
 You want to see which steps are not being used.
 You could use the `--format usage` option in cucumber but your test suite takes over 30 minutes to run and you don't want to wait.
 
