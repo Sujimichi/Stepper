@@ -7,7 +7,7 @@ You are looking at some cucumber features and you come to step which you want to
     And I have put "some stuff" into "this field"
 
 You have 100's of step definitions over 10's of files and many are similar.  How do you quickly find where that step definition is?
-You could run that test again with the `--format usage` option but a) you have to wait for that test to run and b) you will get a load of un-needed information about all the other steps.
+You could run that test again with the <code>--format usage</code> option but a) you have to wait for that test to run and b) you will get a load of un-needed information about all the other steps.
 
     step --find "And I have put \"some stuff\" into \"this field\""
 Which will return:
@@ -22,7 +22,7 @@ You can then change --find to --useof and see what other features use this same 
 
 ====Example 2
 You want to see which steps are not being used.
-You could use the `--format usage` option in cucumber but your test suite takes over 30 minutes to run and you don't want to wait.
+You could use the <code>--format usage</code> option in cucumber but your test suite takes over 30 minutes to run and you don't want to wait.
 
     step --notused
 
