@@ -1,12 +1,13 @@
 = Stepper
-Locate step definitions from cucumber features, find which steps are not being used and see which features use a given step definition, without waiting to run your test suite.
+Locate step definitions, find which are not being used and see which features use a given step definition, without waiting to run your test suite.
+
 
 ==Use Cases
 ====Example 1
 You are looking at some cucumber features and you come to step which you want to check.  ie:
     And I have put "some stuff" into "this field"
 
-You have 100's of step definitions over 10's of files and many are similar.  How do you quickly find where that step definition is?
+You have 100's of step definitions over 10's of files, how do you quickly find where that step definition is?
 You could run that test again with the <code>--format usage</code> option but a) you have to wait for that test to run and b) you will get a load of un-needed information about all the other steps.
 
     step --find "And I have put \"some stuff\" into \"this field\""
@@ -15,7 +16,7 @@ Which will return:
     line:	42 in features/my_nondescript_steps.rb
 
 
-You can then change --find to --useof and see what other features use this same step.
+You can then change --find to --useof and see what other features also use this same step.
     step --useof "And I have put \"some stuff\" into \"this field\""
 
 
@@ -25,6 +26,16 @@ You want to see which steps are not being used.
 You could use the <code>--format usage</code> option in cucumber but your test suite takes over 30 minutes to run and you don't want to wait.
 
     step --notused
+
+Which will return
+    File: login_steps.rb
+    5	Given /^I have been logged out$/ do
+    12 Then /^I should be on the "([^"]*)" page$/ do |arg1|
+
+    File: user_steps.rb
+    9	Then /^there should be (\d+) users$/ do |n|
+    13	Then /^there should not be any users$/ do
+
 
 
 Stepper was written in haste to solve a problem.  It could do with improvment!  Feel free to use and improve.
