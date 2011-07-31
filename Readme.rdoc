@@ -1,19 +1,28 @@
 = Stepper
-Locate step definitions from cucumber features, find which steps are not being used and see which features use a given step definition.
+Locate step definitions from cucumber features, find which steps are not being used and see which features use a given step definition, without waiting to run your test suite.
 
 ==Use Cases
+======Example 1
 You are looking at some cucumber features and you come to step which you want to check.  ie:
-
     And I have put "some stuff" into "this field"
 
-There are 100's of step definitions over 10's of files and many are similar.  How do you quickly find where that step definition is?
-You could rak "I have put" but that may well return many steps.  You could get clever with regexps or you could use Stepper
+You have 100's of step definitions over 10's of files and many are similar.  How do you quickly find where that step definition is?
+You could run that test again with the `--format usage` option but a) you have to wait for that test to run and b) you will get a load of un-needed information about all the other steps.
 
     step --find "And I have put \"some stuff\" into \"this field\""
+Which will return:
     found:	Given /^I have put "([^"]*)" into "([^"]*)"$/ do |data, field|
     line:	42 in features/my_nondescript_steps.rb
 
-You have loads of step definitions and your pretty sure that some are not being used anymore.  With a test suite that takes 30 minutes to run trail and error is not your friend, so how do you find your obselete steps?
+
+You can then change --find to --useof and see what other features use this same step.
+    step --useof "And I have put \"some stuff\" into \"this field\""
+
+
+
+======Example 2
+You want to see which steps are not being used.
+You could use the `--format usage` option in cucumber but your test suite takes over 30 minutes to run and you don't want to wait.
 
     step --notused
 
@@ -26,7 +35,7 @@ It makes a couple assumptions
 2. It assumes that your features and step definitions are in rails_root/features
 
 ==install
-NB: not yet release to rubygems.  Need to check a few things first
+NB: not yet release to rubygems.  Need to check a few things first, ie is this actualy worthy of being released!
 Then it will just be good ol'
 
     gem install stepper
