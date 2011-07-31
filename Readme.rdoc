@@ -19,7 +19,12 @@ Which will return:
 You can then change --find to --useof and see what other features also use this same step.
     step --useof "And I have put \"some stuff\" into \"this field\""
 
-
+    File: common_steps.rb
+    42  Given /^I have put "([^"]*)" into "([^"]*)"$/ do |data, field|	Used in 4 features
+        features/login.feature:
+        lines: 18,32
+        features/users.feature:
+        lines: 27,94
 
 ====Example 2
 You want to see which steps are not being used.
@@ -27,16 +32,12 @@ You could use the <code>--format usage</code> option in cucumber but your test s
 
     step --notused
 
-Which will return
-    File: login_steps.rb
-    5	Given /^I have been logged out$/ do
-    12 Then /^I should be on the "([^"]*)" page$/ do |arg1|
 
-    File: user_steps.rb
-    9	Then /^there should be (\d+) users$/ do |n|
-    13	Then /^there should not be any users$/ do
+==install
+NB: not yet release to rubygems.  Need to check a few things first, ie is this actualy worthy of being released!
+Then it will just be good ol'
 
-
+    gem install stepper
 
 Stepper was written in haste to solve a problem.  It could do with improvment!  Feel free to use and improve.
 It is also my first attempt at writing a gem!
@@ -45,16 +46,10 @@ It makes a couple assumptions
 1. It assumes that it will be run from the rails root dir
 2. It assumes that your features and step definitions are in rails_root/features
 
-==install
-NB: not yet release to rubygems.  Need to check a few things first, ie is this actualy worthy of being released!
-Then it will just be good ol'
-
-    gem install stepper
-
 
 ==Full Usage
 
-All commands are run in the Command line from within your rails directory;
+All commands are run in the Command line from within your rails root directory;
 
 ===Find a step definintion given a line from a feature
 
@@ -67,7 +62,7 @@ Works just as well when "And" is used
 
     step --find "And I am logged in as \"sujimichi\" with the password \"password\""
 
---find will return the matched step and line number and file name where it is defined.
+--find will return the matched step and line number and file name where it is defined, ie:
     found:  Given /^I am logged in as "([^"]*)" with the password "([^"]*)"$/ do |username, password|
     line:   50 in login_steps.rb
 
@@ -96,10 +91,14 @@ To get a list of the steps which are no longer being used by your features
 
     step --notused
 
-    File: features/state_steps.rb
-    13	When /^I fill in the table data with "([^"]*)"$/ do |arg1|
-    76	Then /^"([^"]*)" should have the table data "([^"]*)"$/ do |e, arg1|
-    81	Then /^then table data field should show "([^"]*)"$/ do |arg1|
+Which will return
+    File: login_steps.rb
+    5 Given /^I have been logged out$/ do
+    12  Then /^I should be on the "([^"]*)" page$/ do |arg1|
+
+    File: user_steps.rb
+    9	Then /^there should be (\d+) users$/ do |n|
+    13	Then /^there should not be any users$/ do
 
     File: features/common_steps.rb
     99	Given /^the user "([^"]*)"$/ do |arg1|
