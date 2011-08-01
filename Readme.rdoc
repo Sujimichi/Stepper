@@ -1,5 +1,5 @@
 = Stepper
-Locate step definitions, find which are not being used and see which features use a given step definition, without waiting to run your test suite.
+A Command line tool to locate step definitions, find which are not being used and see which features use a given step definition, without waiting to run your test suite.
 
 
 ==Use Cases
@@ -34,10 +34,13 @@ You could use the <code>--format usage</code> option in cucumber but your test s
 
 
 ==install
-NB: not yet release to rubygems.  Need to check a few things first, ie is this actualy worthy of being released!
-Then it will just be good ol'
+I've not released this to ruby gems yet.  It's my first Gem and was written in haste, its probably not worthy of rubygem release, but if you want to use it;
 
-    gem install stepper
+    git@github.com:Sujimichi/Stepper.git
+    cd stepper
+    bundle
+    rake install
+
 
 Stepper was written in haste to solve a problem.  It could do with improvment!  Feel free to use and improve.
 It is also my first attempt at writing a gem!
